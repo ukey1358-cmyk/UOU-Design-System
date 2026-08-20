@@ -1,0 +1,30 @@
+<!-- @dsCard group="Type" viewport="700x150" name="Weights & families" subtitle="Regular 400 · Medium 500 · Bold 700" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 22px 24px; background: var(--gray-0); font-family: var(--font-sans); display: flex; gap: 36px; }
+  .col { flex: 1; }
+  .label { font-size: 11px; font-weight: 700; color: var(--gray-500); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 14px; }
+  .w { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .wn { font-family: var(--font-mono); font-size: 11px; color: var(--gray-400); width: 64px; }
+  .sample { font-size: 22px; color: var(--gray-900); }
+  .mono { font-family: var(--font-mono); font-size: 18px; color: var(--gray-800); }
+</style>
+</head>
+<body>
+  <div class="col">
+    <div class="label">Sans · Pretendard</div>
+    <div class="w"><span class="wn">400</span><span class="sample" style="font-weight:400">울산대 Aa 가나</span></div>
+    <div class="w"><span class="wn">500</span><span class="sample" style="font-weight:500">울산대 Aa 가나</span></div>
+    <div class="w"><span class="wn">700</span><span class="sample" style="font-weight:700">울산대 Aa 가나</span></div>
+  </div>
+  <div class="col">
+    <div class="label">Mono</div>
+    <div class="w"><span class="wn">mono</span><span class="mono">--uou-green</span></div>
+    <div class="w"><span class="wn"></span><span class="mono">#009A44</span></div>
+  </div>
+</body>
+</html>

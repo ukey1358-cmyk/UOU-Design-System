@@ -1,0 +1,219 @@
+<!-- @dsCard group="UOU Website" viewport="1280x900" name="울리니 SNS 카드 메이커" subtitle="포즈+문구+브랜드 합성 → 인스타 1:1 / 스토리 9:16 PNG 내보내기" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>울리니 SNS 카드 메이커 · 울산대학교</title>
+<link rel="icon" type="image/png" href="../../assets/logo/favicon.png">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--gray-50); font-family: var(--font-sans); }
+  .ico { display: inline-flex; }
+  .seg { appearance: none; cursor: pointer; font-family: var(--font-sans); }
+  .lbl { font-size: 12px; font-weight: 700; color: var(--gray-500); letter-spacing: .03em; text-transform: uppercase; margin: 0 0 10px; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    const { Button, Input } = window.UOUDesignSystem_08270e;
+    function Ico({ name, size = 18, color = "currentColor" }) {
+      React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
+      return <i className="ico" data-lucide={name} style={{ width: size, height: size, color }} />;
+    }
+
+    const POSES = [
+      ["cheer","응원"],["heart","하트"],["thumbs-up","엄지척"],["greeting","인사"],
+      ["graduation","졸업식"],["studying","공부"],["late-night","야작"],["coffee","커피"],
+      ["campus-tour","캠퍼스탐방"],["surprised","놀람"],["rainy-day","비오는날"],["sportswear","운동복"],
+    ];
+    const BGS = [
+      { id: "white",  label: "화이트",  fill: "#FFFFFF", text: "#1C1E20", sub: "#565B60", accent: "#009A44", dark: false },
+      { id: "mint",   label: "민트",    fill: "#E6F5EC", text: "#003D1A", sub: "#006E30", accent: "#009A44", dark: false },
+      { id: "green",  label: "딥그린",  grad: ["#006E30","#005625"], text: "#FFFFFF", sub: "#C2E8D2", accent: "#CC9900", dark: true },
+      { id: "yellow", label: "옐로우",  fill: "#FBF3DE", text: "#3F2D00", sub: "#A67A00", accent: "#CC9900", dark: false },
+    ];
+    const FORMATS = { square: { w: 1080, h: 1080, label: "정사각 1:1" }, story: { w: 1080, h: 1920, label: "스토리 9:16" } };
+
+    function wrapText(ctx, text, maxWidth) {
+      const lines = []; let line = "";
+      for (const ch of text) {
+        if (ch === "\n") { lines.push(line); line = ""; continue; }
+        const test = line + ch;
+        if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line = ch; }
+        else line = test;
+      }
+      if (line) lines.push(line);
+      return lines;
+    }
+
+    function App() {
+      const [fmt, setFmt] = React.useState("square");
+      const [bgId, setBgId] = React.useState("green");
+      const [pose, setPose] = React.useState("cheer");
+      const [headline, setHeadline] = React.useState("2026 신입생\n환영합니다");
+      const [sub, setSub] = React.useState("진리 · 자주 · 봉사 · University of Ulsan");
+      const canvasRef = React.useRef(null);
+      const poseImg = React.useRef(null);
+      const [ready, setReady] = React.useState(0);
+
+      // load pose image
+      React.useEffect(() => {
+        const img = new Image();
+        img.onload = () => { poseImg.current = img; setReady(r => r + 1); };
+        img.src = `../../assets/mascot/poses-2d/${pose}.png`;
+      }, [pose]);
+
+      const F = FORMATS[fmt];
+      const BG = BGS.find(b => b.id === bgId);
+
+      function draw(ctx) {
+        const { w: W, h: H } = F;
+        ctx.clearRect(0, 0, W, H);
+        // background
+        if (BG.grad) { const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, BG.grad[0]); g.addColorStop(1, BG.grad[1]); ctx.fillStyle = g; }
+        else ctx.fillStyle = BG.fill;
+        ctx.fillRect(0, 0, W, H);
+
+        const M = Math.round(W * 0.085);
+        // accent bar
+        ctx.fillStyle = BG.accent;
+        ctx.fillRect(M, M, Math.round(W * 0.12), 10);
+
+        // headline
+        ctx.textBaseline = "top";
+        ctx.fillStyle = BG.text;
+        const hSize = fmt === "story" ? 92 : 84;
+        ctx.font = `800 ${hSize}px Pretendard, sans-serif`;
+        const textMax = fmt === "story" ? W - M * 2 : W * 0.66;
+        let y = M + 34;
+        for (const para of headline.split("\n")) {
+          for (const ln of wrapText(ctx, para, textMax)) { ctx.fillText(ln, M, y); y += hSize * 1.12; }
+        }
+        // subtext
+        y += 12;
+        ctx.fillStyle = BG.sub;
+        const sSize = fmt === "story" ? 40 : 36;
+        ctx.font = `500 ${sSize}px Pretendard, sans-serif`;
+        for (const ln of wrapText(ctx, sub, textMax)) { ctx.fillText(ln, M, y); y += sSize * 1.3; }
+
+        // mascot
+        const img = poseImg.current;
+        if (img && img.width) {
+          const targetH = fmt === "story" ? H * 0.42 : H * 0.56;
+          const scale = targetH / img.height;
+          const dw = img.width * scale, dh = img.height * scale;
+          const dx = fmt === "story" ? (W - dw) / 2 : W - dw - M * 0.5;
+          const dy = H - dh - (fmt === "story" ? M * 1.4 : M * 0.6);
+          ctx.drawImage(img, dx, dy, dw, dh);
+        }
+
+        // wordmark
+        ctx.fillStyle = BG.text;
+        ctx.font = `800 ${fmt === "story" ? 38 : 34}px Pretendard, sans-serif`;
+        ctx.fillText("울산대학교", M, H - M - (fmt === "story" ? 64 : 56));
+        ctx.fillStyle = BG.sub;
+        ctx.font = `600 ${fmt === "story" ? 22 : 20}px Pretendard, sans-serif`;
+        ctx.fillText("UNIVERSITY OF ULSAN", M, H - M - (fmt === "story" ? 22 : 18));
+      }
+
+      React.useEffect(() => {
+        const c = canvasRef.current; if (!c) return;
+        c.width = F.w; c.height = F.h;
+        const ctx = c.getContext("2d");
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => draw(ctx));
+        draw(ctx);
+      }, [fmt, bgId, headline, sub, ready]);
+
+      function download() {
+        const c = canvasRef.current;
+        c.toBlob((blob) => {
+          const a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = `uou-sns-${fmt}-${pose}.png`;
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        }, "image/png");
+      }
+
+      const segWrap = { display: "inline-flex", background: "var(--gray-100)", borderRadius: "var(--radius-md)", padding: 4, gap: 4 };
+      const seg = (on) => ({ border: "none", borderRadius: "var(--radius-sm)", padding: "8px 14px", fontSize: 14, fontWeight: 700, cursor: "pointer", background: on ? "var(--gray-0)" : "transparent", color: on ? "var(--green-700)" : "var(--gray-600)", boxShadow: on ? "var(--shadow-sm)" : "none" });
+
+      return (
+        <div style={{ maxWidth: "var(--container-max)", margin: "0 auto", padding: "32px 24px 56px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
+            <img src="../../assets/mascot/ulrinee-front.png" alt="울리니" style={{ height: 52 }} />
+            <div>
+              <h1 style={{ fontSize: 32, fontWeight: 800, color: "var(--gray-900)", margin: 0 }}>울리니 SNS 카드 메이커</h1>
+              <p style={{ fontSize: 14, color: "var(--gray-600)", margin: "2px 0 0" }}>포즈·문구·배경을 골라 인스타그램용 이미지를 만들고 PNG로 내려받으세요.</p>
+            </div>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "380px 1fr", gap: 32, alignItems: "start" }}>
+            {/* controls */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+              <div>
+                <p className="lbl">포맷</p>
+                <div style={segWrap}>
+                  {Object.entries(FORMATS).map(([id, f]) => (
+                    <button key={id} className="seg" style={seg(fmt === id)} onClick={() => setFmt(id)}>{f.label}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="lbl">배경</p>
+                <div style={{ display: "flex", gap: 10 }}>
+                  {BGS.map(b => (
+                    <button key={b.id} title={b.label} onClick={() => setBgId(b.id)}
+                      style={{ width: 54, height: 54, borderRadius: "var(--radius-md)", cursor: "pointer",
+                        border: bgId === b.id ? "2px solid var(--green-500)" : "1px solid var(--gray-200)",
+                        background: b.grad ? `linear-gradient(180deg, ${b.grad[0]}, ${b.grad[1]})` : b.fill }} />
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="lbl">문구</p>
+                <textarea value={headline} onChange={e => setHeadline(e.target.value)} rows={2}
+                  style={{ width: "100%", boxSizing: "border-box", padding: "10px 12px", border: "1px solid var(--gray-300)", borderRadius: "var(--radius-sm)", fontFamily: "var(--font-sans)", fontSize: 15, fontWeight: 700, color: "var(--gray-900)", resize: "vertical", marginBottom: 10 }} />
+                <Input value={sub} onChange={e => setSub(e.target.value)} placeholder="보조 문구" />
+              </div>
+
+              <div>
+                <p className="lbl">포즈</p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 8 }}>
+                  {POSES.map(([slug, label]) => (
+                    <button key={slug} title={label} onClick={() => setPose(slug)}
+                      style={{ aspectRatio: "1", padding: 4, cursor: "pointer", background: "var(--gray-0)",
+                        border: pose === slug ? "2px solid var(--green-500)" : "1px solid var(--gray-200)", borderRadius: "var(--radius-md)",
+                        display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <img src={`../../assets/mascot/poses-2d/${slug}.png`} alt={label} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <Button variant="primary" size="lg" onClick={download} style={{ width: "100%" }}>
+                <Ico name="download" size={20} color="#fff" /> PNG 다운로드
+              </Button>
+            </div>
+
+            {/* preview */}
+            <div style={{ display: "flex", justifyContent: "center", background: "var(--gray-100)", borderRadius: "var(--radius-xl)", padding: 28 }}>
+              <canvas ref={canvasRef} style={{ maxWidth: "100%", maxHeight: 620, height: fmt === "story" ? 620 : "auto", width: fmt === "story" ? "auto" : "100%", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-lg)", background: "#fff" }} />
+            </div>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

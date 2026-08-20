@@ -1,0 +1,38 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Accent · Yellow & Semantic" subtitle="옐로우는 절제 사용 · 의미 색상" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--gray-0); font-family: var(--font-sans); display: flex; gap: 28px; }
+  .group { flex: 1; }
+  .label { font-size: 11px; font-weight: 700; color: var(--gray-500); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; }
+  .scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .cell .chip { height: 52px; border-radius: var(--radius-sm); border: 1px solid rgba(0,0,0,0.06); }
+  .cell .k { font-size: 10px; font-weight: 700; color: var(--gray-800); margin-top: 5px; }
+  .cell .h { font-family: var(--font-mono); font-size: 9px; color: var(--gray-500); }
+</style>
+</head>
+<body>
+  <div class="group">
+    <div class="label">Yellow</div>
+    <div class="scale">
+      <div class="cell"><div class="chip" style="background:var(--yellow-50)"></div><div class="k">50</div></div>
+      <div class="cell"><div class="chip" style="background:var(--yellow-100)"></div><div class="k">100</div></div>
+      <div class="cell"><div class="chip" style="background:var(--yellow-300)"></div><div class="k">300</div></div>
+      <div class="cell"><div class="chip" style="background:var(--yellow-500)"></div><div class="k">500</div></div>
+      <div class="cell"><div class="chip" style="background:var(--yellow-700)"></div><div class="k">700</div></div>
+    </div>
+  </div>
+  <div class="group">
+    <div class="label">Semantic</div>
+    <div class="scale" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="cell"><div class="chip" style="background:var(--color-success)"></div><div class="k">success</div><div class="h">009A44</div></div>
+      <div class="cell"><div class="chip" style="background:var(--color-info)"></div><div class="k">info</div><div class="h">2563EB</div></div>
+      <div class="cell"><div class="chip" style="background:var(--color-warning)"></div><div class="k">warning</div><div class="h">CC9900</div></div>
+      <div class="cell"><div class="chip" style="background:var(--color-danger)"></div><div class="k">danger</div><div class="h">D32F2F</div></div>
+    </div>
+  </div>
+</body>
+</html>

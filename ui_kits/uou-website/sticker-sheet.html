@@ -1,0 +1,124 @@
+<!-- @dsCard group="UOU Website" viewport="1280x860" name="울리니 스티커 시트" subtitle="응용형 2D/3D 스티커 갤러리 — 탭 전환·다운로드" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>울리니 스티커 · 울산대학교</title>
+<link rel="icon" type="image/png" href="../../assets/logo/favicon.png">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--gray-50); font-family: var(--font-sans); }
+  .wrap { max-width: var(--container-max); margin: 0 auto; padding: 40px 24px 64px; }
+  .ico { display: inline-flex; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    const { Tabs, Badge, Button } = window.UOUDesignSystem_08270e;
+    function Ico({ name, size = 18, color = "currentColor" }) {
+      React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
+      return <i className="ico" data-lucide={name} style={{ width: size, height: size, color }} />;
+    }
+
+    const SETS = {
+      "2d": { dir: "poses-2d", items: [
+        ["cheer","응원"],["heart","하트"],["thumbs-up","엄지척"],["greeting","인사"],
+        ["surprised","놀람"],["thinking","생각중"],["sulking","삐짐"],["studying","공부"],
+        ["late-night","야작"],["graduation","졸업식"],["campus-tour","캠퍼스탐방"],["coffee","커피"],
+        ["varsity-jacket","과잠"],["sportswear","운동복"],["rainy-day","비오는날"],
+        ["hanbok-male","한복(남)"],["hanbok-female","한복(여)"],
+      ]},
+      "3d": { dir: "poses-3d", items: [
+        ["cheer","응원"],["heart","하트"],["thumbs-up","엄지척"],["greeting","인사"],
+        ["sulking","삐짐"],["late-night","야작"],["graduation","졸업식"],
+        ["campus-tour","캠퍼스탐방"],["coffee","커피"],["varsity-jacket","과잠"],
+      ]},
+    };
+
+    function Sticker({ dir, slug, label }) {
+      const [hover, setHover] = React.useState(false);
+      const src = `../../assets/mascot/${dir}/${slug}.png`;
+      return (
+        <div
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          style={{
+            background: "var(--gray-0)",
+            border: "1px solid " + (hover ? "var(--green-300)" : "var(--gray-200)"),
+            borderRadius: "var(--radius-lg)",
+            padding: 14,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 10,
+            boxShadow: hover ? "var(--shadow-md)" : "none",
+            transition: "box-shadow 140ms ease, border-color 140ms ease",
+          }}
+        >
+          <div style={{ width: "100%", aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--green-50)", borderRadius: "var(--radius-md)", padding: 10, boxSizing: "border-box" }}>
+            <img src={src} alt={label} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+            <span style={{ fontSize: 14, fontWeight: 600, color: "var(--gray-800)" }}>{label}</span>
+            <a
+              href={src}
+              download={`ulrinee-${slug}.png`}
+              title="다운로드"
+              style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 32, height: 32, borderRadius: "var(--radius-md)", color: "var(--green-700)", background: hover ? "var(--green-50)" : "transparent", textDecoration: "none" }}
+            >
+              <Ico name="download" size={18} />
+            </a>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [tab, setTab] = React.useState("2d");
+      const set = SETS[tab];
+      return (
+        <div className="wrap">
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 6 }}>
+            <img src="../../assets/mascot/ulrinee-front.png" alt="울리니" style={{ height: 56, width: "auto" }} />
+            <div>
+              <h1 style={{ fontSize: 36, fontWeight: 800, color: "var(--gray-900)", margin: 0, lineHeight: "44px" }}>울리니 스티커</h1>
+              <p style={{ fontSize: 15, color: "var(--gray-600)", margin: "2px 0 0" }}>마스코트 응용 일러스트를 골라 다운로드하세요. 형태·색상 변형은 금지됩니다.</p>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", margin: "24px 0 20px" }}>
+            <Tabs
+              value={tab}
+              onChange={setTab}
+              items={[
+                { id: "2d", label: `2D 일러스트 (${SETS["2d"].items.length})` },
+                { id: "3d", label: `3D 렌더 (${SETS["3d"].items.length})` },
+              ]}
+            />
+            <Badge variant="default">투명 PNG · 고해상도</Badge>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}>
+            {set.items.map(([slug, label]) => (
+              <Sticker key={slug} dir={set.dir} slug={slug} label={label} />
+            ))}
+          </div>
+
+          <div style={{ marginTop: 36, padding: "18px 20px", background: "var(--gray-0)", border: "1px solid var(--gray-200)", borderRadius: "var(--radius-lg)", display: "flex", alignItems: "center", gap: 12, color: "var(--gray-600)", fontSize: 13 }}>
+            <span style={{ color: "var(--green-600)" }}><Ico name="info" size={18} /></span>
+            교내 구성원 외 외부 사용 시 대외홍보팀(052-259-2627) 승인이 필요합니다. 늘리기·압축·회전·색상 변경 금지.
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

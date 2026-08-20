@@ -1,0 +1,30 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Primary · Green scale" subtitle="버튼·링크·강조 — 500이 Primary" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--gray-0); font-family: var(--font-sans); }
+  .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+  .cell .chip { height: 60px; border-radius: var(--radius-sm); border: 1px solid rgba(0,0,0,0.06); }
+  .cell .k { font-size: 11px; font-weight: 700; color: var(--gray-800); margin-top: 6px; }
+  .cell .h { font-family: var(--font-mono); font-size: 9px; color: var(--gray-500); }
+  .star { color: var(--green-600); }
+</style>
+</head>
+<body>
+  <div class="scale">
+    <div class="cell"><div class="chip" style="background:var(--green-50)"></div><div class="k">50</div><div class="h">E6F5EC</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-100)"></div><div class="k">100</div><div class="h">C2E8D2</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-200)"></div><div class="k">200</div><div class="h">8FD4AC</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-300)"></div><div class="k">300</div><div class="h">5BBF85</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-400)"></div><div class="k">400</div><div class="h">2EAE64</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-500)"></div><div class="k">500 <span class="star">★</span></div><div class="h">009A44</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-600)"></div><div class="k">600</div><div class="h">00873B</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-700)"></div><div class="k">700</div><div class="h">006E30</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-800)"></div><div class="k">800</div><div class="h">005625</div></div>
+    <div class="cell"><div class="chip" style="background:var(--green-900)"></div><div class="k">900</div><div class="h">003D1A</div></div>
+  </div>
+</body>
+</html>

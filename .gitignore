@@ -1,0 +1,22 @@
+# Secrets
+.env
+.env.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Internal documents / PII — never publish
+대학정보공시 담당자 포털.html
+2027 위촉사정관 운영 안내.html
+redesign/disclosure-portal.html
+screenshots/
+decks/
+uploads/

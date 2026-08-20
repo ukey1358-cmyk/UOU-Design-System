@@ -1,0 +1,35 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Brand · 전용색상" subtitle="주색 그린 · 보조 그레이 · 보조 옐로우 (DIC 별색 근사)" -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 20px; background: var(--gray-0); }
+  .row { display: flex; gap: var(--space-4); }
+  .swatch { flex: 1; }
+  .chip { height: 72px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.06); }
+  .name { font-family: var(--font-sans); font-size: 13px; font-weight: 700; color: var(--gray-900); margin-top: 10px; }
+  .meta { font-family: var(--font-mono); font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="swatch">
+      <div class="chip" style="background: var(--uou-green)"></div>
+      <div class="name">UOU Green · 주색</div>
+      <div class="meta">#009A44 · DIC 643</div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background: var(--uou-gray)"></div>
+      <div class="name">UOU Gray · 보조</div>
+      <div class="meta">#333333 · DIC 654</div>
+    </div>
+    <div class="swatch">
+      <div class="chip" style="background: var(--uou-yellow)"></div>
+      <div class="name">UOU Yellow · 보조</div>
+      <div class="meta">#CC9900 · DIC 207</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>울산대학교 입시통계 포털</title>
+<link rel="icon" type="image/png" href="../assets/logo/favicon.png">
+<link rel="stylesheet" href="../styles.css">
+<script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--gray-800);background:var(--gray-0);-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  .ico{display:inline-flex;align-items:center;justify-content:center}
+  .wrap{max-width:var(--container-max);margin:0 auto;padding:0 24px}
+
+  /* ── HEADER ── */
+  .page-header{position:sticky;top:0;z-index:40;background:var(--gray-0);border-bottom:1px solid var(--gray-100)}
+  .page-header .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-mark{height:30px;width:auto;display:block}
+  .brand-text{display:flex;flex-direction:column;border-left:1px solid var(--gray-200);padding-left:12px;line-height:1.15}
+  .brand-text .ko{font-size:18px;font-weight:800;color:var(--gray-900);letter-spacing:-.01em}
+  .brand-text .en{font-size:10px;font-weight:600;color:var(--gray-500);letter-spacing:.06em}
+  nav.primary{display:flex;align-items:center;gap:4px}
+  nav.primary a{padding:8px 16px;font-size:16px;font-weight:600;color:var(--gray-700);border-radius:var(--radius-md);position:relative}
+  nav.primary a:hover{color:var(--green-600);background:var(--green-50)}
+  nav.primary a.active{color:var(--green-700)}
+  nav.primary a.active::after{content:'';position:absolute;left:16px;right:16px;bottom:-19px;height:2px;background:var(--green-500)}
+
+  /* ── SECTION STRIP ── */
+  .section-strip{background:var(--gray-50);border-bottom:1px solid var(--gray-100)}
+  .section-strip .wrap{display:flex;align-items:center;gap:12px;height:42px}
+  .section-strip .label{font-size:12px;font-weight:700;color:var(--green-700);letter-spacing:.04em}
+  .section-strip .meta{font-size:12px;color:var(--gray-500)}
+  .section-strip .meta::before{content:'·';margin-right:10px;color:var(--gray-300)}
+
+  /* ── HERO ── */
+  .hero{background:linear-gradient(180deg,var(--green-50) 0%,var(--gray-0) 100%)}
+  .hero-inner{display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:48px;padding:72px 0 80px}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--green-600);margin-bottom:18px}
+  .hero h1{margin:0 0 20px;font-size:52px;line-height:1.15;font-weight:800;letter-spacing:-.02em;color:var(--gray-900)}
+  .hero h1 .accent{color:var(--green-600)}
+  .lead{margin:0 0 32px;font-size:18px;line-height:28px;color:var(--gray-600);max-width:520px}
+  .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 28px;border-radius:var(--radius-md);font-size:16px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .14s,border-color .14s,color .14s}
+  .btn-primary{background:var(--green-500);color:#fff;border:none}
+  .btn-primary:hover{background:var(--green-600)}
+  .btn-outline{background:var(--gray-0);color:var(--gray-800);border:1px solid var(--gray-300)}
+  .btn-outline:hover{background:var(--gray-50);border-color:var(--gray-400)}
+  .hero-crest{display:flex;justify-content:center;align-items:center}
+  .hero-crest img{max-width:100%;height:auto;max-height:260px;filter:drop-shadow(0 12px 28px rgba(0,0,0,.12))}
+
+  /* ── KPI ── */
+  .kpi-section{padding:72px 0}
+  .kpi-header{text-align:center;margin-bottom:40px}
+  .kpi-header h2{margin:0 0 8px;font-size:32px;font-weight:800;color:var(--gray-900);letter-spacing:-.01em}
+  .kpi-header .tagline{margin:0;font-size:15px;color:var(--gray-500)}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .kpi-cell{background:var(--gray-0);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;transition:box-shadow .16s,border-color .16s}
+  .kpi-cell:hover{box-shadow:var(--shadow-md);border-color:var(--green-200)}
+  .kpi-cell .label{font-size:14px;font-weight:600;color:var(--gray-500);margin-bottom:14px}
+  .kpi-cell .value{font-size:40px;font-weight:800;color:var(--green-600);line-height:1.1;letter-spacing:-.02em;white-space:nowrap}
+  .kpi-cell .value.sm{font-size:22px;line-height:1.35;color:var(--gray-900)}
+  .kpi-cell .sub{font-size:13px;color:var(--gray-400);margin-top:12px}
+  .kpi-cell .sub.rate{color:var(--green-700);font-weight:600}
+
+  /* ── BANDS ── */
+  .section-band{padding:72px 0}
+  .band-center{text-align:center}
+  .section-band-dark{background:var(--green-700);background:linear-gradient(160deg,var(--green-700),var(--green-800))}
+  .section-band-dark .band-top{height:4px;background:var(--yellow-500)}
+  .section-band-dark h2{margin:0 0 16px;font-size:36px;font-weight:800;color:#fff;letter-spacing:-.01em}
+  .section-band-dark p{margin:0 auto 28px;font-size:18px;line-height:28px;color:var(--green-100);max-width:720px}
+  .section-band-dark .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+  .section-band-dark .btn-outline:hover{background:rgba(255,255,255,.1);border-color:#fff}
+  .section-band-warm{background:var(--gray-50)}
+
+  .section-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:32px;flex-wrap:wrap}
+  .section-title-row h2{margin:0;font-size:28px;font-weight:800;color:var(--gray-900);letter-spacing:-.01em}
+  .section-title-row .meta{font-size:14px;color:var(--gray-500)}
+
+  /* ── QUICK CARDS ── */
+  .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .quick-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .quick-card{display:flex;flex-direction:column;background:var(--gray-0);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px;position:relative;transition:box-shadow .16s,border-color .16s,transform .16s}
+  .quick-card:hover{box-shadow:var(--shadow-md);border-color:var(--green-300);transform:translateY(-2px)}
+  .quick-card .icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--green-50);color:var(--green-600);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .quick-card .icon svg{width:22px;height:22px}
+  .badge-cat{align-self:flex-start;font-size:12px;font-weight:700;color:var(--green-800);background:var(--green-50);padding:4px 10px;border-radius:var(--radius-full);margin-bottom:12px}
+  .quick-card .title{font-size:18px;font-weight:700;color:var(--gray-900);margin-bottom:8px}
+  .quick-card .desc{font-size:14px;line-height:22px;color:var(--gray-600);margin-bottom:24px}
+  .quick-card .arrow{margin-top:auto;color:var(--green-600);font-size:20px;font-weight:700;transition:transform .16s}
+  .quick-card:hover .arrow{transform:translateX(4px)}
+
+  /* ── FOOTER ── */
+  .site-footer{background:var(--gray-800);border-top:4px solid var(--green-500)}
+  .site-footer-inner{max-width:var(--container-max);margin:0 auto;padding:40px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .wordmark-block{display:flex;align-items:center;gap:12px}
+  .wordmark-mark{height:30px;width:auto;display:block}
+  .wordmark-text{display:flex;flex-direction:column;line-height:1.2}
+  .wordmark-text .ko{font-size:16px;font-weight:700;color:var(--gray-0)}
+  .wordmark-text .en{font-size:11px;color:var(--gray-400);letter-spacing:.04em}
+  .site-footer .meta{font-size:13px;line-height:20px;color:var(--gray-400);text-align:right}
+
+  .sample-note{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:24px;font-size:13px;color:var(--gray-400)}
+  .sample-note .ico{color:var(--gray-400)}
+
+  @media(max-width:880px){
+    .hero-inner{grid-template-columns:1fr;gap:32px;padding:56px 0}
+    .hero-crest{order:-1;max-width:200px;margin:0 auto}
+    .hero h1{font-size:40px}
+    .kpi-row,.quick-grid,.quick-grid.cols-3{grid-template-columns:repeat(2,1fr)}
+    nav.primary a{padding:8px 10px;font-size:15px}
+    .brand-text .ko{font-size:16px}
+  }
+  @media(max-width:520px){
+    .kpi-row,.quick-grid,.quick-grid.cols-3{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="wrap">
+      <a href="#" class="brand">
+        <img src="../assets/logo/logomark-solid.png" alt="UOU" class="brand-mark">
+        <span class="brand-text">
+          <span class="ko">울산대학교 입시통계</span>
+          <span class="en">UNIVERSITY OF ULSAN · ADMISSIONS STATISTICS</span>
+        </span>
+      </a>
+      <nav class="primary">
+        <a href="#" class="active">2026 수시</a>
+        <a href="#">2025 입시결과</a>
+        <a href="#">비교</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="section-strip">
+    <div class="wrap">
+      <span class="label">입시통계 포털</span>
+      <span class="meta">데이터 기준일 2026-05-06 · 입학관리팀 내부용</span>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">2026 ADMISSIONS PORTAL</span>
+          <h1>2026 수시,<br><span class="accent">한 화면에 담다.</span></h1>
+          <p class="lead">모집인원 · 지원자 · 경쟁률을 모집단위와 전형 단위로 빠르게 열람하고, 2025 입시결과와 나란히 비교합니다.</p>
+          <div class="ctas">
+            <a class="btn btn-primary" href="#">2026 수시 보기</a>
+            <a class="btn btn-outline" href="#">비교 모드</a>
+          </div>
+        </div>
+        <div class="hero-crest">
+          <img src="../assets/logo/symbol-mark.png" alt="울산대학교 기린(麒麟) 휘장">
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI -->
+    <section class="kpi-section">
+      <div class="wrap">
+        <div class="kpi-header">
+          <h2>2026학년도 수시 한눈에</h2>
+          <p class="tagline">「전체 지원 현황(정원내·정원외 포함)」 합계 기반</p>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-cell">
+            <div class="label">2026 모집인원</div>
+            <div class="value">1,842 <span style="font-size:20px;font-weight:700">명</span></div>
+            <div class="sub">정원 내·외 합계</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">2026 총 지원자</div>
+            <div class="value">14,206 <span style="font-size:20px;font-weight:700">명</span></div>
+            <div class="sub">수시 전체 지원자</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">2026 평균 경쟁률</div>
+            <div class="value">7.71 : 1</div>
+            <div class="sub">지원자 / 모집인원</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">최고 경쟁률 모집단위</div>
+            <div class="value sm">의예과</div>
+            <div class="sub rate">경쟁률 38.40 : 1</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEEP-GREEN FEATURE BAND -->
+    <section class="section-band section-band-dark">
+      <div class="band-top"></div>
+      <div class="wrap band-center" style="padding-top:0">
+        <h2>2025 vs 2026, 무엇이 달라졌나</h2>
+        <p>모집단위별 지원자 변동, Top 5 상승·하락 학과, 그리고 통합/분리에 따른 매칭 한계까지 — 한 화면에서 비교합니다.</p>
+        <div class="ctas" style="justify-content:center">
+          <a class="btn btn-outline" href="#">비교 보기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2025 SUPPORTING -->
+    <section class="section-band section-band-warm">
+      <div class="wrap">
+        <div class="section-title-row">
+          <h2>2025학년도 입시결과</h2>
+          <span class="meta">석차등급 분포 외 추가 표는 한글 원본 변환 후 채워집니다</span>
+        </div>
+        <div class="quick-grid cols-3">
+          <a class="quick-card" href="#">
+            <span class="icon"><i data-lucide="bar-chart-3"></i></span>
+            <span class="badge-cat">석차등급</span>
+            <span class="title">등록자 석차등급 분포</span>
+            <span class="desc">학과별 등록자의 1~6등급 분포(%)와 누적 막대 차트.</span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="quick-card" href="#">
+            <span class="icon"><i data-lucide="table-2"></i></span>
+            <span class="badge-cat">전체</span>
+            <span class="title">2025 전체 표 트리</span>
+            <span class="desc">대분류 / 소분류 / 표 단위 사이드바 탐색.</span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="quick-card" href="#">
+            <span class="icon"><i data-lucide="arrow-up-down"></i></span>
+            <span class="badge-cat">비교</span>
+            <span class="title">2026과 나란히 비교</span>
+            <span class="desc">모집단위별 지원자 수 변화·Top 5.</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2026 QUICK ENTRY -->
+    <section class="section-band section-band-light">
+      <div class="wrap">
+        <div class="section-title-row">
+          <h2>2026학년도 빠른 진입</h2>
+          <span class="meta">대분류 4 · 표 92개</span>
+        </div>
+        <div class="quick-grid">
+          <a class="quick-card" href="#">
+            <span class="icon"><i data-lucide="target"></i></span>
+            <span class="badge-cat">전체현황</span>
+            <span class="title">전체 지원 현황</span>
+            <span class="desc">정원내·정원외 합산 모집인원·지원자·경쟁률.</span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="quick-card" href="#">
+            <span class="icon"><i data-lucide="book-open"></i></span>
+            <span class="badge-cat">학생부교과</span>
+            <span class="title">학생부교과 전형</span>
+            <span class="desc">교과(지역인재)·교과(일반) 모집단위별 통계.</span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="quick-card" href="#">
+            <span class="icon"><i data-lucide="graduation-cap"></i></span>
+            <span class="badge-cat">학생부종합</span>
+            <span class="title">학생부종합 전형</span>
+            <span class="desc">잠재역량·지역잠재 모집단위별 통계.</span>
+            <span class="arrow">→</span>
+          </a>
+          <a class="quick-card" href="#">
+            <span class="icon"><i data-lucide="file-text"></i></span>
+            <span class="badge-cat">실기/논술</span>
+            <span class="title">실기·논술 전형</span>
+            <span class="desc">예체능·논술우수자 모집단위별 통계.</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="sample-note">
+          <span class="ico"><i data-lucide="info" style="width:15px;height:15px"></i></span>
+          상단 KPI 수치는 디자인 시안용 예시값입니다. 실제 포털은 데이터 파일에서 자동 로드됩니다.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="wordmark-block">
+        <img src="../assets/logo/logomark-outline.png" alt="UOU" class="wordmark-mark">
+        <span class="wordmark-text">
+          <span class="ko">울산대학교</span>
+          <span class="en">UNIVERSITY OF ULSAN</span>
+        </span>
+      </div>
+      <div class="meta">
+        데이터 기준일: 2026-05-06 · 담당: 입학관리팀 · 내부용 정적 사이트<br>
+        © University of Ulsan — Admissions Statistics Portal
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    if (window.lucide) window.lucide.createIcons();
+  </script>
+
+  <template id="__bundler_thumbnail">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100" height="100" fill="#E6F5EC"/>
+      <g fill="none" stroke="#009A44" stroke-width="4" stroke-linecap="round">
+        <path d="M34 36 v18 a6 6 0 0 0 12 0 v-18"/>
+        <path d="M50 36 a8 9 0 0 1 0 18"/>
+        <path d="M54 36 v18 a6 6 0 0 0 12 0 v-18"/>
+      </g>
+      <rect x="34" y="66" width="32" height="4" rx="2" fill="#009A44"/>
+    </svg>
+  </template>
+</body>
+</html>
