@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"UOUDesignSystem_08270e","components":[{"name":"Badge","sourcePath":"components/display/Badge.jsx"},{"name":"Card","sourcePath":"components/display/Card.jsx"},{"name":"Button","sourcePath":"components/forms/Button.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"}],"sourceHashes":{"components/display/Badge.jsx":"d3edb7eba065","components/display/Card.jsx":"046b956f6efe","components/forms/Button.jsx":"6deeb934e8c9","components/forms/Input.jsx":"8c2907627ca1","components/navigation/Tabs.jsx":"3e2f246b42a5","decks/admissions-officer-2027/charts.js":"603022e1656c","decks/admissions-officer-2027/deck-stage.js":"2c50f71f5203","ui_kits/uou-website/Brand.jsx":"004bc48edda6","ui_kits/uou-website/Content.jsx":"1fff7f1eac65","ui_kits/uou-website/Footer.jsx":"0be937cd1f37","ui_kits/uou-website/Header.jsx":"6c0ed994e00b","ui_kits/uou-website/Hero.jsx":"638d5aec0d1b","ui_kits/uou-website/Mascot.jsx":"36ab1e1a3c83"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":4,"namespace":"UOUDesignSystem_08270e","components":[{"name":"Badge","sourcePath":"components/display/Badge.jsx"},{"name":"Card","sourcePath":"components/display/Card.jsx"},{"name":"Button","sourcePath":"components/forms/Button.jsx"},{"name":"Input","sourcePath":"components/forms/Input.jsx"},{"name":"Tabs","sourcePath":"components/navigation/Tabs.jsx"}],"sourceHashes":{"components/display/Badge.jsx":"d3edb7eba065","components/display/Card.jsx":"046b956f6efe","components/forms/Button.jsx":"6deeb934e8c9","components/forms/Input.jsx":"8c2907627ca1","components/navigation/Tabs.jsx":"3e2f246b42a5","decks/admissions-officer-2027/charts.js":"603022e1656c","decks/admissions-officer-2027/deck-stage.js":"2c50f71f5203","ui_kits/uou-website/Brand.jsx":"004bc48edda6","ui_kits/uou-website/Content.jsx":"1fff7f1eac65","ui_kits/uou-website/Footer.jsx":"0be937cd1f37","ui_kits/uou-website/Header.jsx":"6c0ed994e00b","ui_kits/uou-website/Hero.jsx":"811591a1be2d","ui_kits/uou-website/Mascot.jsx":"36ab1e1a3c83"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -3710,18 +3710,6 @@ function Hero() {
       overflow: "hidden"
     }
   }, /*#__PURE__*/React.createElement("div", {
-    "aria-hidden": "true",
-    style: {
-      position: "absolute",
-      right: -40,
-      bottom: -80,
-      fontSize: 420,
-      fontWeight: 800,
-      color: "rgba(255,255,255,0.05)",
-      lineHeight: 1,
-      fontFamily: "var(--font-mono)"
-    }
-  }, "\u03A3"), /*#__PURE__*/React.createElement("div", {
     style: {
       maxWidth: "var(--container-max)",
       margin: "0 auto",

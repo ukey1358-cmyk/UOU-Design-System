@@ -38,10 +38,6 @@
         "message": "Raw px value — use a design-system spacing token via var()."
       },
       {
-        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Pretendard|Noto Sans KR))/i]",
-        "message": "Font not provided by the design system. Available: Pretendard, Noto Sans KR."
-      },
-      {
         "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|style|key|ref|className|style|children)$/]",
         "message": "<Badge> doesn't accept that prop. Declared props: children, variant, style."
       },
@@ -337,9 +333,6 @@
       "--ulrinee-beige": "color",
       "--ulrinee-coral": "color"
     },
-    "fontFamilies": [
-      "Noto Sans KR",
-      "Pretendard"
-    ]
+    "fontFamilies": []
   }
 }

@@ -12,22 +12,6 @@ function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* subtle sigma watermark */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          right: -40,
-          bottom: -80,
-          fontSize: 420,
-          fontWeight: 800,
-          color: "rgba(255,255,255,0.05)",
-          lineHeight: 1,
-          fontFamily: "var(--font-mono)",
-        }}
-      >
-        Σ
-      </div>
       <div
         style={{
           maxWidth: "var(--container-max)",

@@ -6,20 +6,22 @@
 
    ⚠️ SUBSTITUTION FLAG: 우리고딕 → Pretendard.
       The official print/signage typeface is 우리고딕 (Woori Gothic), which is
-      not licensed as a webfont. Pretendard is the closest modern Korean gothic
-      and is loaded here from CDN. Swap in real 우리고딕 / Pretendard binaries
-      if you have a license and want self-hosted, offline-capable fonts.
+      not licensed as a webfont. Swap in real 우리고딕 binaries if you have a
+      license and want self-hosted, offline-capable fonts.
+
+   ⚡ 로딩 성능 규칙 (PERFORMANCE)
+      1. 한글 웹폰트는 **Pretendard 하나만** 씁니다. Noto Sans KR 등 두 번째
+         CJK 웹폰트를 함께 불러오지 않습니다 (각 1MB 내외).
+      2. Pretendard는 **dynamic subset**으로 로드합니다. 페이지에 실제로 쓰인
+         글자가 속한 조각(각 수십 KB)만 내려받아, 전체 variable woff2(약 1.2MB)
+         대비 초기 전송량이 90% 이상 줄어듭니다.
+      3. `font-display: swap` — 폰트를 기다리며 텍스트를 숨기지 않습니다.
+         (dynamic subset CSS에 이미 포함)
+      4. 문서 `<head>` 최상단에 preconnect를 넣어 CDN 핸드셰이크를 앞당깁니다:
+         <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+      5. 오프라인/사내망 산출물은 woff2를 `assets/fonts/` 로 자가호스팅하고
+         아래 @import 대신 로컬 @font-face를 씁니다.
    ========================================================================== */
 
-/* Noto Sans KR — fallback web gothic (Google Fonts). @import must precede other rules. */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
-
-/* Pretendard — variable Korean/Latin gothic. Declared explicitly so the design
-   system ships a resolvable webfont; binary served from jsDelivr npm CDN. */
-@font-face {
-  font-family: "Pretendard";
-  font-weight: 45 920;
-  font-style: normal;
-  font-display: swap;
-  src: url("https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2/PretendardVariable.woff2") format("woff2-variations");
-}
+/* Pretendard variable — dynamic subset (unicode-range 분할). @import는 다른 룰보다 앞에. */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css");
